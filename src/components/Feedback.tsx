@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { FormEvent, useState } from "react";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 const testimonials = [
@@ -47,20 +46,8 @@ function Stars({ count, max = 5 }: { count: number; max?: number }) {
 }
 
 export function Feedback() {
-  const [rating, setRating] = useState(5);
-  const [submitted, setSubmitted] = useState(false);
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-    window.setTimeout(() => setSubmitted(false), 4500);
-  };
-
   return (
-    <section
-      id="feedback"
-      className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28"
-    >
+    <section id="feedback" className="relative overflow-hidden border-t border-white/[0.06] py-20 md:py-28">
       <SectionPhotoBg
         imageUrl={sectionBg.feedback}
         imageClassName="bg-[position:48%_35%] opacity-[0.58] sm:opacity-[0.62]"
@@ -79,8 +66,8 @@ export function Feedback() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400/90">Feedback</p>
             <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Voices from our cohorts</h2>
             <p className="mt-4 text-slate-300">
-              Like many training portals, we surface public testimonials up front and invite quick ratings so visitors
-              see social proof before they apply—pair this block with your real reviews or Trustpilot embed later.
+              Learner stories and ratings from recent programs—swap quotes for your real testimonials when you&apos;re
+              ready.
             </p>
           </div>
           <motion.div
@@ -127,70 +114,9 @@ export function Feedback() {
           ))}
         </ul>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="mx-auto mt-16 max-w-2xl rounded-2xl border border-white/[0.1] bg-slate-950/70 p-6 backdrop-blur-md md:p-8"
-        >
-          <p className="text-center text-sm font-semibold text-white">Share quick feedback</p>
-          <p className="mt-2 text-center text-xs text-slate-400">
-            Static demo — connect to your CRM or Forms endpoint when you&apos;re ready.
-          </p>
-          <form onSubmit={onSubmit} className="mt-8 space-y-5">
-            <div>
-              <label htmlFor="fb-name" className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Name <span className="font-normal text-slate-500">(optional)</span>
-              </label>
-              <input
-                id="fb-name"
-                name="name"
-                autoComplete="name"
-                placeholder="Jamie Patel"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/30"
-              />
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Overall rating</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {[1, 2, 3, 4, 5].map((n) => (
-                  <button
-                    key={n}
-                    type="button"
-                    onClick={() => setRating(n)}
-                    className={`rounded-lg border px-3 py-2 text-xs font-semibold transition ${
-                      rating === n
-                        ? "border-violet-500/60 bg-violet-600/25 text-white"
-                        : "border-white/10 bg-white/5 text-slate-300 hover:border-white/20"
-                    }`}
-                  >
-                    {n}★
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label htmlFor="fb-comment" className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Comment
-              </label>
-              <textarea
-                id="fb-comment"
-                name="comment"
-                rows={4}
-                required
-                placeholder="What stood out in your cohort or browsing experience?"
-                className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-slate-900/80 px-4 py-3 text-sm text-white outline-none transition focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/30"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full rounded-xl bg-gradient-to-r from-amber-500/90 to-orange-600 px-4 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_0_28px_rgba(251,191,36,0.25)] transition hover:brightness-110"
-            >
-              {submitted ? "Thanks — we’ve logged your note (demo)" : "Submit feedback"}
-            </button>
-          </form>
-        </motion.div>
+        <p className="mt-16 text-center text-xs text-slate-500">
+          © {new Date().getFullYear()} Apex AI Institute. Crafted for learners pursuing responsible AI.
+        </p>
       </div>
     </section>
   );

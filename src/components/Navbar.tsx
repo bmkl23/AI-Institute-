@@ -7,8 +7,8 @@ const links = [
   { id: "courses", label: "Courses" },
   { id: "team", label: "Team" },
   { id: "syllabus", label: "Syllabus" },
-  { id: "feedback", label: "Feedback" },
   { id: "contact", label: "Contact" },
+  { id: "feedback", label: "Feedback" },
 ];
 
 function scrollToSection(id: string) {
@@ -59,20 +59,34 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white md:hidden"
+          className="inline-flex h-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-white/25 bg-white/12 text-zinc-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm outline-none ring-offset-2 ring-offset-slate-950 focus-visible:ring-2 focus-visible:ring-violet-400 md:hidden active:bg-white/20"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <div className="flex w-6 flex-col justify-center gap-1.5">
-            <span
-              className={`block h-0.5 w-full origin-center rounded-full bg-white transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
-            />
-            <span className={`block h-0.5 w-full rounded-full bg-white transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span
-              className={`block h-0.5 w-full origin-center rounded-full bg-white transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`}
-            />
-          </div>
+          {open ? (
+            <svg
+              className="h-6 w-6 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.25}
+              aria-hidden
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg
+              className="h-6 w-6 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2.25}
+              aria-hidden
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
       </nav>
 
@@ -83,7 +97,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-white/[0.08] bg-slate-950/95 md:hidden"
+            className="overflow-hidden border-t border-white/[0.12] bg-slate-950 shadow-[0_12px_40px_rgba(0,0,0,0.45)] md:hidden"
           >
             <ul className="flex flex-col gap-1 px-4 py-4">
               {links.map((l) => (
@@ -91,7 +105,7 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => handleNavigate(l.id)}
-                    className="w-full rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-200 transition hover:bg-white/5 hover:text-white"
+                    className="w-full rounded-xl px-4 py-3.5 text-left text-base font-medium text-white transition hover:bg-white/10 active:bg-white/15"
                   >
                     {l.label}
                   </button>

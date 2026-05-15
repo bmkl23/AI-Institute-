@@ -137,10 +137,6 @@ export function Contact() {
             </div>
           </motion.div>
         </div>
-
-        <p className="mt-12 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} Apex AI Institute. Crafted for learners pursuing responsible AI.
-        </p>
       </div>
     </section>
   );

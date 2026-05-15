@@ -17,8 +17,8 @@ export default function App() {
         <Courses />
         <Team />
         <Syllabus />
-        <Feedback />
         <Contact />
+        <Feedback />
       </main>
     </div>
   );
