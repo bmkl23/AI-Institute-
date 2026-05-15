@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";
+import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "sent">("idle");
@@ -11,8 +12,13 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-slate-950 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+    <section id="contact" className="relative overflow-hidden bg-slate-950 py-20 md:py-28">
+      <SectionPhotoBg
+        imageUrl={sectionBg.contact}
+        imageClassName="opacity-[0.14] bg-cover bg-[position:50%_60%] sm:opacity-[0.22]"
+        overlayClassName="bg-gradient-to-b from-slate-950/96 via-slate-950/94 to-slate-950"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}

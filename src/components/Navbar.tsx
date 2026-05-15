@@ -7,6 +7,7 @@ const links = [
   { id: "courses", label: "Courses" },
   { id: "team", label: "Team" },
   { id: "syllabus", label: "Syllabus" },
+  { id: "feedback", label: "Feedback" },
   { id: "contact", label: "Contact" },
 ];
 

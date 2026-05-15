@@ -4,6 +4,7 @@ import { About } from "./components/About";
 import { Courses } from "./components/Courses";
 import { Team } from "./components/Team";
 import { Syllabus } from "./components/Syllabus";
+import { Feedback } from "./components/Feedback";
 import { Contact } from "./components/Contact";
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Courses />
         <Team />
         <Syllabus />
+        <Feedback />
         <Contact />
       </main>
     </div>

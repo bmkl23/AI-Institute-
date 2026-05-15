@@ -1,29 +1,23 @@
 import { motion } from "framer-motion";
-import { ParticleBackdrop } from "./ParticleBackdrop";
-import { useTypingLines } from "../hooks/useTypingLines";
-
-const taglines = [
-  "Build production-grade ML systems from day one.",
-  "Learn with mentors from leading AI research labs.",
-  "Turn data into decisions — and models into impact.",
-  "Real projects. Real datasets. Real career outcomes.",
-];
+import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 function scrollToSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 export function Hero() {
-  const typed = useTypingLines(taglines);
-
   return (
     <section
       id="home"
       className="relative overflow-hidden border-b border-white/[0.06] bg-slate-950"
     >
-      <ParticleBackdrop />
+      <SectionPhotoBg
+        imageUrl={sectionBg.hero}
+        imageClassName="bg-cover bg-center md:bg-[position:52%_40%]"
+        overlayClassName="bg-gradient-to-br from-slate-950/80 via-slate-950/65 to-indigo-950/78"
+      />
 
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-4 pb-28 pt-20 md:grid-cols-2 md:px-6 md:pb-36 md:pt-28">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-12 px-4 pb-28 pt-20 md:grid-cols-2 md:px-6 md:pb-36 md:pt-28">
         <div>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -41,17 +35,15 @@ export function Hero() {
           >
             Master AI &amp; Data Science With Industry Experts
           </motion.h1>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 min-h-[4.25rem]"
+            className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-slate-200 sm:text-xl"
           >
-            <p className="font-mono text-base text-sky-300/95 sm:text-lg">
-              <span className="text-violet-400">▸</span> {typed}
-              <span className="ml-0.5 inline-block h-5 w-0.5 translate-y-0.5 animate-pulse bg-violet-400" />
-            </p>
-          </motion.div>
+            Learn with mentors from leading AI research labs and practitioners shipping models in production—from
+            foundations to deployment-ready portfolios.
+          </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}

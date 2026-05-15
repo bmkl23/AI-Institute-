@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 const whyUs = [
   {
@@ -43,8 +44,13 @@ const fadeUp = { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0
 
 export function About() {
   return (
-    <section id="about" className="border-b border-white/[0.06] bg-slate-950 py-20 md:py-28">
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
+    <section id="about" className="relative overflow-hidden border-b border-white/[0.06] bg-slate-950 py-20 md:py-28">
+      <SectionPhotoBg
+        imageUrl={sectionBg.about}
+        imageClassName="opacity-[0.18] bg-cover bg-center sm:opacity-[0.28]"
+        overlayClassName="bg-gradient-to-b from-slate-950/95 via-slate-900/92 to-slate-950"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
         <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="max-w-3xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-violet-400">About</p>
           <h2 className="mt-3 text-balance text-3xl font-bold text-white md:text-4xl">
@@ -98,7 +104,7 @@ export function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: i * 0.06 }}
-                className="rounded-2xl border border-white/[0.08] bg-slate-900/50 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]"
+                className="rounded-2xl border border-white/[0.08] bg-slate-900/65 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-[2px]"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10">
                   {item.icon}
