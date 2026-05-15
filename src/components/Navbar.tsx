@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { navigateToSectionAfterMenu } from "../utils/scroll";
 
 const links = [
   { id: "home", label: "Home" },
@@ -11,17 +12,17 @@ const links = [
   { id: "feedback", label: "Feedback" },
 ];
 
-function scrollToSection(id: string) {
-  const el = document.getElementById(id);
-  el?.scrollIntoView({ behavior: "smooth", block: "start" });
+function scrollNav(id: string, menuWasOpen: boolean) {
+  navigateToSectionAfterMenu(id, { menuWasOpen });
 }
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
 
   const handleNavigate = (id: string) => {
-    scrollToSection(id);
+    const wasOpen = open;
     setOpen(false);
+    scrollNav(id, wasOpen);
   };
 
   return (

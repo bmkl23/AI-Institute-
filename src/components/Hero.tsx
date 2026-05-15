@@ -1,9 +1,6 @@
 import { motion } from "framer-motion";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
-
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+import { scrollToSection } from "../utils/scroll";
 
 export function Hero() {
   return (
