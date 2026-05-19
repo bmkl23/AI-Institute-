@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { site } from "../config/site";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 const testimonials = [
@@ -115,7 +116,7 @@ export function Feedback() {
         </ul>
 
         <p className="mt-16 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} Apex AI Institute. Crafted for learners pursuing responsible AI.
+          © {new Date().getFullYear()} {site.name}. {site.tagline}.
         </p>
       </div>
     </section>

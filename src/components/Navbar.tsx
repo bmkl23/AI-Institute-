@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { BrandLogo } from "./BrandLogo";
 import { navigateToSectionAfterMenu } from "../utils/scroll";
 
 const links = [
@@ -27,24 +28,16 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-slate-950/75 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-6">
-        <a
-          href="#home"
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-6 md:py-4">
+        <BrandLogo
+          imageClassName="h-9 w-9 object-contain md:h-10 md:w-10"
           onClick={(e) => {
             e.preventDefault();
             handleNavigate("home");
           }}
-          className="flex items-center gap-2"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-lg font-bold text-white shadow-[0_0_24px_rgba(139,92,246,0.45)]">
-            AI
-          </span>
-          <span className="text-sm font-semibold tracking-wide text-white md:text-base">
-            Apex<span className="text-violet-300">Institute</span>
-          </span>
-        </a>
+        />
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-6 lg:flex xl:gap-7">
           {links.map((l) => (
             <li key={l.id}>
               <button
@@ -60,31 +53,17 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-xl border border-white/25 bg-white/12 text-zinc-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm outline-none ring-offset-2 ring-offset-slate-950 focus-visible:ring-2 focus-visible:ring-violet-400 md:hidden active:bg-white/20"
+          className="inline-flex h-11 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-xl border border-white/25 bg-white/12 text-zinc-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm outline-none ring-offset-2 ring-offset-slate-950 focus-visible:ring-2 focus-visible:ring-blue-400 lg:hidden active:bg-white/20"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
           {open ? (
-            <svg
-              className="h-6 w-6 shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.25}
-              aria-hidden
-            >
+            <svg className="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.25} aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg
-              className="h-6 w-6 shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.25}
-              aria-hidden
-            >
+            <svg className="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.25} aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
@@ -98,7 +77,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-white/[0.12] bg-slate-950 shadow-[0_12px_40px_rgba(0,0,0,0.45)] md:hidden"
+            className="overflow-hidden border-t border-white/[0.12] bg-slate-950 shadow-[0_12px_40px_rgba(0,0,0,0.45)] lg:hidden"
           >
             <ul className="flex flex-col gap-1 px-4 py-4">
               {links.map((l) => (
