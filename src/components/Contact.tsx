@@ -28,7 +28,7 @@ export function Contact() {
           className="max-w-2xl"
         >
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-sky-400">Contact</p>
-          <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Register or get in touch</h2>
+          <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Contact Our Team</h2>
           <p className="mt-4 text-slate-400">
             All communications are in <strong className="font-medium text-slate-300">{site.language}</strong>.
             Use your broker referral token below if you were referred by an approved partner.
@@ -36,72 +36,7 @@ export function Contact() {
         </motion.div>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-5">
-          <motion.form
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45 }}
-            onSubmit={onSubmit}
-            className="lg:col-span-2 space-y-4 rounded-2xl border border-white/[0.08] bg-slate-900/50 p-6 md:p-8"
-          >
-            <motion.div>
-              <label htmlFor="name" className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                required
-                autoComplete="name"
-                placeholder="Your full name"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/35"
-              />
-            </motion.div>
-            <motion.div>
-              <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                autoComplete="email"
-                placeholder="you@email.com"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/35"
-              />
-            </motion.div>
-            <motion.div>
-              <label htmlFor="referral" className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Referral token <span className="font-normal text-slate-500">(optional)</span>
-              </label>
-              <input
-                id="referral"
-                name="referral"
-                placeholder="Broker referral token for 20% discount"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/35"
-              />
-            </motion.div>
-            <motion.div>
-              <label htmlFor="message" className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                placeholder="Tell us about your education level (After A/L, undergraduate, graduate) and goals..."
-                className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-white outline-none transition focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/35"
-              />
-            </motion.div>
-            <button
-              type="submit"
-              className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3.5 text-sm font-semibold text-white shadow-[0_0_32px_rgba(37,99,235,0.35)] transition hover:brightness-110"
-            >
-              {status === "sent" ? "Message received!" : "Send message"}
-            </button>
-          </motion.form>
+          
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
