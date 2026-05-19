@@ -1,17 +1,8 @@
 import { motion } from "framer-motion";
-import { FormEvent, useState } from "react";
 import { site } from "../config/site";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 export function Contact() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("sent");
-    window.setTimeout(() => setStatus("idle"), 4000);
-  };
-
   return (
     <section id="contact" className="relative overflow-hidden bg-slate-950 py-20 md:py-28">
       <SectionPhotoBg
@@ -35,15 +26,13 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-5">
-          
-
+        <div className="mt-12">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="flex flex-col gap-4 lg:col-span-3"
+            className="flex flex-col gap-4"
           >
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <div className="rounded-2xl border border-white/[0.08] bg-slate-900/50 p-5">
@@ -90,7 +79,6 @@ export function Contact() {
               </div>
             </div>
 
-   
             <a
               href={site.whatsapp.href}
               target="_blank"
