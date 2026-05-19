@@ -19,12 +19,12 @@ export function Hero() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="relative z-10 mx-auto flex max-w-6xl justify-center px-4 pt-16 md:px-6 md:pt-20"
+        className="relative z-10 mx-auto hidden max-w-6xl justify-center px-4 pt-16 md:flex md:px-6 md:pt-20"
       >
-      
+        
       </motion.div>
 
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-12 px-4 pb-28 pt-8 md:grid-cols-2 md:px-6 md:pb-36 md:pt-10">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-12 px-4 pb-28 pt-14 md:grid-cols-2 md:px-6 md:pb-36 md:pt-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
