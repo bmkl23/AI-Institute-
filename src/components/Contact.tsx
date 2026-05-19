@@ -155,12 +155,7 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.08] bg-slate-900/50 p-5">
-              <p className="text-xs font-bold uppercase tracking-widest text-violet-300">Language</p>
-              <p className="mt-3 text-sm font-medium text-white">{site.language}</p>
-              <p className="mt-2 text-xs text-slate-500">All program materials and communications in English.</p>
-            </div>
-
+   
             <a
               href={site.whatsapp.href}
               target="_blank"

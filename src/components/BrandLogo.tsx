@@ -26,7 +26,7 @@ export function BrandLogo({
           <span className="block truncate text-sm font-bold tracking-tight text-white sm:text-[15px]">
             Peritus
           </span>
-          <span className="hidden text-[10px] font-medium text-sky-300/90 sm:block sm:text-[11px]">
+          <span className="block text-[10px] font-medium text-sky-300/90 sm:text-[11px]">
             Research Bootcamp 2026
           </span>
         </span>
