@@ -4,44 +4,19 @@ type Member = {
   name: string;
   role: string;
   image: string;
-  social: { label: string; href: string }[];
 };
 
 const team: Member[] = [
   {
-    name: "Dr. Elara Voss",
-    role: "Director of Research & Curriculum",
-    image: "https://picsum.photos/seed/apex1/400/400",
-    social: [
-      { label: "LinkedIn", href: "https://linkedin.com" },
-      { label: "X", href: "https://x.com" },
-    ],
+    name: "Subhath Abeysekara",
+    role: "Lead AI Engineer | AI & Blockchain Researcher | IEEE & Springer Published Author | Research Supervisor – BIT Program, University of Moratuwa",
+    image: "src/Img/subath.jpeg",
   },
+
   {
-    name: "Marcus Chen",
-    role: "Lead ML Engineer, MLOps",
-    image: "https://picsum.photos/seed/apex2/400/400",
-    social: [
-      { label: "LinkedIn", href: "https://linkedin.com" },
-      { label: "GitHub", href: "https://github.com" },
-    ],
-  },
-  {
-    name: "Priya Nair",
-    role: "Head of Applied AI & LLM Systems",
-    image: "https://picsum.photos/seed/apex3/400/400",
-    social: [
-      { label: "LinkedIn", href: "https://linkedin.com" },
-      { label: "X", href: "https://x.com" },
-    ],
-  },
-  {
-    name: "Jordan Blake",
-    role: "Career Coach & Placement Lead",
-    image: "https://picsum.photos/seed/apex4/400/400",
-    social: [
-      { label: "LinkedIn", href: "https://linkedin.com" },
-    ],
+    name: "Rukshan J. Senanayaka",
+    role: "Founder & Lead, ALevellers.lk | Visiting Lecturer at UCL Sri Lanka | MPhil Candidate, University of Moratuwa | B.Sc. (Hons.) IT (First Class Honours)",
+    image: "src/Img/rukshan.jpeg",
   },
 ];
 
@@ -109,18 +84,7 @@ export function Team() {
                 <p className="text-lg font-semibold text-white">{m.name}</p>
                 <p className="mt-1 text-sm text-violet-200/90">{m.role}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {m.social.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-200 transition hover:border-violet-400/40 hover:text-white"
-                    >
-                      <SocialIcon label={s.label} />
-                      {s.label}
-                    </a>
-                  ))}
+                  
                 </div>
               </div>
             </motion.li>

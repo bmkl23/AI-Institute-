@@ -6,7 +6,6 @@ import { navigateToSectionAfterMenu } from "../utils/scroll";
 const links = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "courses", label: "Courses" },
   { id: "team", label: "Team" },
   { id: "syllabus", label: "Syllabus" },
   { id: "contact", label: "Contact" },
