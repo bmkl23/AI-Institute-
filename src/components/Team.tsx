@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 
+
 type Member = {
   name: string;
   role: string;

@@ -10,8 +10,8 @@ export const site = {
     display: "072-1452191",
     href: "https://wa.me/94721452191",
   },
-  email: "" as string,
-  linkedIn: "" as string,
+  email: "" ,
+  linkedIn: "" ,
   vision:
     "To build a new generation of innovative AI researchers, engineers, and data-driven problem solvers in Sri Lanka by providing accessible, research-oriented education in Artificial Intelligence, Machine Learning, and Data Science that bridges the gap between academic learning and real-world industry applications.",
   mission:
