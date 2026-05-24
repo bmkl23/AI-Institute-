@@ -14,7 +14,7 @@ const team: Member[] = [
   {
     name: "Subhath Abeysekara",
     role:
-      "Lead AI Engineer | AI & Blockchain Researcher | IEEE & Springer Published Author | Research Supervisor – BIT Program, University of Moratuwa",
+      "Lead AI Engineer | AI & Blockchain Researcher | IEEE & Springer Published Author | Research Supervisor – BIT Program, University of Moratuwa | B.Sc. (Hons.) in IT, University of Moratuwa",
     image: subath,
   },
   {
