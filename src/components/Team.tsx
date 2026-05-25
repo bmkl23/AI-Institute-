@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 import subath from "../Img/subath.jpeg";
 import rukshan from "../Img/rukshan.jpeg";
-import { SectionPhotoBg} from "./SectionPhotoBg";
+import { SectionPhotoBg } from "./SectionPhotoBg";
 
 type Publication = {
   venue: string;
@@ -114,11 +114,11 @@ export function Team() {
       id="team"
       className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28"
     >
-      {/* ✅ Background wallpaper (same pattern as Feedback) */}
+      {/* Background */}
       <SectionPhotoBg
-  imageUrl="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
- overlayClassName="bg-slate-950/30"
-/>
+        imageUrl="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=2070&q=80"
+        overlayClassName="bg-slate-950/30"
+      />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
         {/* Heading */}
@@ -154,7 +154,6 @@ export function Team() {
               transition={{ duration: 0.45, delay: i * 0.08 }}
               className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/60 backdrop-blur-xl"
             >
-              {/* Image */}
               <div className="relative aspect-square overflow-hidden">
                 <img
                   src={m.image}
@@ -164,7 +163,6 @@ export function Team() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
               </div>
 
-              {/* Info */}
               <div className="p-5 pb-4">
                 <p className="text-lg font-semibold text-white">{m.name}</p>
                 <p className="mt-1 text-sm leading-relaxed text-violet-200/90">
@@ -172,7 +170,6 @@ export function Team() {
                 </p>
               </div>
 
-              {/* Publications */}
               <div className="border-t border-white/[0.06] px-5 pb-6 pt-5">
                 <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-400">
                   Research Publications
@@ -206,7 +203,7 @@ export function Team() {
                           {pub.authors}
                         </p>
 
-                        <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
+                        <p className="mt-2 text-[11px] text-slate-400">
                           {pub.description}
                         </p>
 
@@ -215,7 +212,7 @@ export function Team() {
                             href={pub.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-blue-400 hover:text-blue-300"
+                            className="mt-3 inline-flex text-[11px] font-semibold text-blue-400 hover:text-blue-300"
                           >
                             View on IEEEXplore
                           </a>
