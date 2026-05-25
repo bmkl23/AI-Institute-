@@ -10,7 +10,7 @@ type Publication = {
   title: string;
   authors: string;
   description: string;
-  url: string | null;
+  url?: string | null;
 };
 
 type Member = {
@@ -53,7 +53,7 @@ const team: Member[] = [
         title: "A Hybrid Blockchain for User Rating in Social Media",
         authors: "Subhath Abeysekara",
         description:
-          "Published at the 2024 Global Conference on Communications and Information Technologies (GCCIT).",
+          "Published at GCCIT 2024.",
         url: null,
       },
       {
@@ -81,17 +81,17 @@ const team: Member[] = [
           "How Well Do LLMs Understand Sinhala Metaphors? Insights from SinMet-5K.",
         authors: "R. J. Senanayaka and T. Thanthriwatta",
         description:
-          "Introduces SinMet-5K, the first multi-annotator Sinhala metaphor dataset (5,000 lyric sentences, three-tier evaluation design). Benchmarks GPT-4 and DeepSeek-V3 zero-shot — reaching up to 90% accuracy across variants.",
+          "Sinhala metaphor dataset benchmarking GPT-4 and DeepSeek-V3.",
         url: "https://ieeexplore.ieee.org/document/11499936",
       },
       {
         venue: "IEEE SCSE 2026",
         date: "Mar 2026",
         title:
-          "What Do Students Need from Mobile Learning Platforms for High-Stakes Examination Preparation?",
+          "What Do Students Need from Mobile Learning Platforms?",
         authors: "R. J. Senanayaka and G. U. Ganegoda",
         description:
-          "Cross-sectional needs assessment (N=135, 17 districts) identifying five priority mobile-learning feature categories; informs alevellers.lk.",
+          "Mobile learning feature study across Sri Lanka.",
         url: "https://ieeexplore.ieee.org/document/11499819",
       },
       {
@@ -99,9 +99,9 @@ const team: Member[] = [
         date: "Dec 2024",
         title:
           "SingRAG: A Translation-Augmented Framework for Code-Mixed Singlish Processing.",
-        authors: "R. J. Senanayaka, N. Dulsara, and N. Premadasa",
+        authors: "R. J. Senanayaka et al.",
         description:
-          "LLaMA-2 7B framework combining a custom transliterator and bidirectional translation with RAG for low-resource Sinhala-English code-mixed processing.",
+          "RAG-based Sinhala-English code-mixed NLP system.",
         url: "https://ieeexplore.ieee.org/document/10857714",
       },
     ],
@@ -138,8 +138,7 @@ export function Team() {
           </h2>
 
           <p className="mt-4 text-slate-400">
-            A hybrid faculty of research leads, staff engineers, and product
-            strategists—aligned on practical craft.
+            A hybrid faculty of research leads, engineers, and strategists.
           </p>
         </motion.div>
 
@@ -165,9 +164,7 @@ export function Team() {
 
               <div className="p-5 pb-4">
                 <p className="text-lg font-semibold text-white">{m.name}</p>
-                <p className="mt-1 text-sm leading-relaxed text-violet-200/90">
-                  {m.role}
-                </p>
+                <p className="mt-1 text-sm text-violet-200/90">{m.role}</p>
               </div>
 
               <div className="border-t border-white/[0.06] px-5 pb-6 pt-5">
@@ -181,7 +178,7 @@ export function Team() {
 
                     return (
                       <li
-                        key={pub.title}
+                        key={`${pub.title}-${j}`}
                         className={`rounded-xl border ${accent.border} bg-slate-900/70 p-4`}
                       >
                         <div className="flex flex-wrap items-center gap-2">
@@ -214,7 +211,7 @@ export function Team() {
                             rel="noopener noreferrer"
                             className="mt-3 inline-flex text-[11px] font-semibold text-blue-400 hover:text-blue-300"
                           >
-                            View on IEEEXplore
+                            View Publication
                           </a>
                         )}
                       </li>
