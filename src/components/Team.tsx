@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 import subath from "../Img/subath.jpeg";
 import rukshan from "../Img/rukshan.jpeg";
+import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 type Publication = {
   venue: string;
@@ -111,10 +112,16 @@ export function Team() {
   return (
     <section
       id="team"
-      className="border-b border-white/[0.06] bg-slate-950 py-20 md:py-28"
+      className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28"
     >
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
-        {/* Section heading */}
+      {/* ✅ Background wallpaper (same pattern as Feedback) */}
+      <SectionPhotoBg
+  imageUrl="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+ overlayClassName="bg-slate-950/30"
+/>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -136,7 +143,7 @@ export function Team() {
           </p>
         </motion.div>
 
-        {/* Mentor cards */}
+        {/* Cards */}
         <ul className="mt-14 grid gap-10 sm:grid-cols-2">
           {team.map((m, i) => (
             <motion.li
@@ -145,9 +152,9 @@ export function Team() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/55"
+              className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-slate-900/60 backdrop-blur-xl"
             >
-              {/* Photo */}
+              {/* Image */}
               <div className="relative aspect-square overflow-hidden">
                 <img
                   src={m.image}
@@ -157,10 +164,9 @@ export function Team() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
               </div>
 
-              {/* Bio */}
+              {/* Info */}
               <div className="p-5 pb-4">
                 <p className="text-lg font-semibold text-white">{m.name}</p>
-
                 <p className="mt-1 text-sm leading-relaxed text-violet-200/90">
                   {m.role}
                 </p>
@@ -187,13 +193,12 @@ export function Team() {
                           >
                             {pub.venue}
                           </span>
-
                           <span className="text-[11px] text-slate-500">
                             {pub.date}
                           </span>
                         </div>
 
-                        <p className="mt-2 text-xs font-semibold leading-snug text-white">
+                        <p className="mt-2 text-xs font-semibold text-white">
                           {pub.title}
                         </p>
 
@@ -205,28 +210,14 @@ export function Team() {
                           {pub.description}
                         </p>
 
-                        {pub.url !== null && (
+                        {pub.url && (
                           <a
                             href={pub.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-blue-400 transition hover:text-blue-300"
+                            className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-blue-400 hover:text-blue-300"
                           >
                             View on IEEEXplore
-
-                            <svg
-                              className="h-3 w-3"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                              />
-                            </svg>
                           </a>
                         )}
                       </li>
