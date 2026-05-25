@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 import subath from "../Img/subath.jpeg";
 import rukshan from "../Img/rukshan.jpeg";
-import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
+import { SectionPhotoBg} from "./SectionPhotoBg";
 
 type Publication = {
   venue: string;
