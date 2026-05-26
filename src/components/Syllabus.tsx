@@ -382,13 +382,13 @@ export function Syllabus() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-400">Final Outcomes</p>
           <h3 className="mt-1.5 text-lg font-bold text-white">What you'll walk away with</h3>
           <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { icon: "", label: "Graded Certificate Completion" },
-              { icon: "", label: "Research Project Experience" },
-              { icon: "", label: "Viva Evaluation Experience" },
-              { icon: "", label: "Opportunity for Research Publication" },
-              { icon: "", label: "Internship Opportunities for Top Performers" },
-              { icon: "", label: "Industry & Research Mentorship Experience" },
+          {[
+              { icon: "🎓", label: "Graded Certificate Completion" },
+              { icon: "🔬", label: "Research Project Experience" },
+              { icon: "🎤", label: "Viva Evaluation Experience" },
+              { icon: "📄", label: "Opportunity for Research Publication" },
+              { icon: "💼", label: "Internship Opportunities for Top Performers" },
+              { icon: "🤝", label: "Industry & Research Mentorship Experience" },
             ].map((o) => (
               <div key={o.label} className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3.5 py-2.5">
                 <span className="text-lg">{o.icon}</span>

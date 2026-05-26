@@ -1,19 +1,17 @@
 import { motion } from "framer-motion";
-import { site } from "../config/site";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 const highlights = [
-  { icon: "", label: "Research Publication Opportunities" },
-  { icon: "", label: "Hands-on AI & Machine Learning Projects" },
-  { icon: "", label: "One-on-One Expert Mentorship" },
-  { icon: "", label: "Real-World Problem Solving Experience" },
-  { icon: "", label: "Viva-Based Evaluations" },
-  { icon: "", label: "Paid Internship (Full-Time or Part-Time)" },
-  { icon: "", label: "Industry & Research Focused Learning" },
-  { icon: "", label: "Graded Professional Certification" },
+  { icon: "📄", label: "Research Publication Opportunities" },
+  { icon: "🧠", label: "Hands-on AI & Machine Learning Projects" },
+  { icon: "👤", label: "One-on-One Expert Mentorship" },
+  { icon: "🌍", label: "Real-World Problem Solving Experience" },
+  { icon: "🎤", label: "Viva-Based Evaluations" },
+  { icon: "💼", label: "Paid Internship (Full-Time or Part-Time)" },
+  { icon: "🔬", label: "Industry & Research Focused Learning" },
+  { icon: "🎓", label: "Graded Professional Certification" },
 ];
 
-// ✅ Hardcoded Tailwind classes — dynamic strings get purged at build time
 const badges = [
   {
     cls: "border-emerald-500/35 bg-emerald-500/10 text-emerald-300",
@@ -67,13 +65,11 @@ export function Hero() {
         overlayClassName="bg-gradient-to-br from-slate-950/85 via-slate-950/70 to-blue-950/80"
       />
 
-      {/* Top edge accent */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
 
-      {/* ── Main grid — tight top padding, generous bottom ── */}
       <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-4 pt-8 pb-14 md:grid-cols-[1fr_400px] md:gap-10 md:px-6 md:pt-10 md:pb-16 lg:pt-12 lg:pb-20">
 
-        {/* ── LEFT ── */}
+        {/* LEFT */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,7 +98,6 @@ export function Hero() {
             Move Beyond Theory — Learn AI Through Research, Innovation &amp; Real-World Implementation.
           </p>
 
-          {/* Trust badges — hardcoded classes so Tailwind doesn't purge them */}
           <div className="mt-6 flex flex-wrap gap-2">
             {badges.map(({ cls, iconCls, icon, label }) => (
               <div
@@ -120,7 +115,7 @@ export function Hero() {
           </p>
         </motion.div>
 
-        {/* ── RIGHT — Highlights card ── */}
+        {/* RIGHT */}
         <motion.div
           initial={{ opacity: 0, x: 24 }}
           animate={{ opacity: 1, x: 0 }}
@@ -128,8 +123,6 @@ export function Hero() {
           className="hidden md:block"
         >
           <div className="rounded-2xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-black/40 backdrop-blur-md">
-
-            {/* Card header */}
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-400">
@@ -144,7 +137,6 @@ export function Hero() {
 
             <div className="my-3 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-            {/* List */}
             <motion.ul
               variants={stagger.container}
               initial="initial"
@@ -163,7 +155,6 @@ export function Hero() {
               ))}
             </motion.ul>
 
-            {/* Callouts */}
             <div className="mt-3 grid grid-cols-2 gap-2">
               <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.07] px-3 py-2">
                 <p className="text-[10px] font-bold uppercase tracking-wide text-amber-300">⚡ Limited Seats</p>
@@ -176,10 +167,8 @@ export function Hero() {
             </div>
           </div>
         </motion.div>
-
       </div>
 
-      {/* Bottom fade */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-slate-950 to-transparent" />
     </section>
   );
