@@ -37,8 +37,7 @@ export function Feedback() {
       <SectionPhotoBg
         imageUrl={sectionBg.feedback}
         imageClassName="bg-[position:48%_35%] opacity-[0.58] sm:opacity-[0.62]"
-        overlayClassName="bg-gradient-to-b from-slate-950/88 via-slate-950/72 to-slate-950/93"
-      />
+overlayClassName="bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/40"      />
       
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
