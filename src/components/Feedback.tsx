@@ -34,12 +34,12 @@ function Stars({ count, max = 5 }: { count: number; max?: number }) {
 export function Feedback() {
   return (
     <section id="feedback" className="relative overflow-hidden border-t border-white/[0.06] py-14 md:py-20">
-
       <SectionPhotoBg
-  imageUrl="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=2070&q=80"
-  imageClassName="bg-cover bg-center opacity-90"
-  overlayClassName="bg-gradient-to-b from-slate-950/70 via-slate-950/50 to-slate-950/80"
-/>
+        imageUrl={sectionBg.feedback}
+        imageClassName="bg-[position:48%_35%] opacity-[0.58] sm:opacity-[0.62]"
+        overlayClassName="bg-gradient-to-b from-slate-950/88 via-slate-950/72 to-slate-950/93"
+      />
+      
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
         {/* Header */}
