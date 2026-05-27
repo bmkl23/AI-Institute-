@@ -1,37 +1,22 @@
 import { motion } from "framer-motion";
 import { site } from "../config/site";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
+import malith from "../Img/Malitha malli.jpeg";
 
 const testimonials = [
   {
     quote:
-      "The capstone mirrored our company’s stack. I went from notebooks to a monitored deployment in eight weeks—mentors actually read my design doc.",
-    name: "Samira Okonkwo",
-    role: "ML Engineer · FinTech",
-    avatar: "https://i.pravatar.cc/120?img=32",
-    rating: 5,
-  },
-  {
-    quote:
-      "Placement support was blunt in the best way: mock panels, live coding, and referrals that matched my seniority instead of spamming junior roles.",
-    name: "Leo Martins",
-    role: "Senior Data Scientist · Health",
-    avatar: "https://i.pravatar.cc/120?img=12",
-    rating: 5,
-  },
-  {
-    quote:
-      "Flexible evenings + async labs meant I could keep my job. Syllabus depth on LLMs and governance finally closed gaps my self-study skipped.",
-    name: "Hannah Cho",
-    role: "Product Manager → AI Ops",
-    avatar: "https://i.pravatar.cc/120?img=47",
+      "Peritus Research Bootcamp provided valuable hands-on experience in AI and Machine Learning with strong mentorship and research guidance. The practical projects, viva evaluations, and research focused learning environment helped me improve my technical and problem solving skills while gaining real-world exposure.",
+    name: "Malith Weerarathne",
+    role: "IT Undergraduate, Faculty of Information Technology, University of Moratuwa",
+    avatar: malith,
     rating: 5,
   },
 ];
 
 function Stars({ count, max = 5 }: { count: number; max?: number }) {
   return (
-    <span className="flex gap-0.5 text-amber-400" aria-hidden>
+    <span className="flex gap-0.5 text-amber-400" aria-hidden={true}>
       {Array.from({ length: max }, (_, i) => (
         <svg
           key={i}
@@ -48,7 +33,7 @@ function Stars({ count, max = 5 }: { count: number; max?: number }) {
 
 export function Feedback() {
   return (
-    <section id="feedback" className="relative overflow-hidden border-t border-white/[0.06] py-20 md:py-28">
+    <section id="feedback" className="relative overflow-hidden border-t border-white/[0.06] py-14 md:py-20">
       <SectionPhotoBg
         imageUrl={sectionBg.feedback}
         imageClassName="bg-[position:48%_35%] opacity-[0.58] sm:opacity-[0.62]"
@@ -56,6 +41,7 @@ export function Feedback() {
       />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,11 +52,11 @@ export function Feedback() {
           <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-400/90">Feedback</p>
             <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">Voices from our cohorts</h2>
-            <p className="mt-4 text-slate-300">
-              Learner stories and ratings from recent programs—swap quotes for your real testimonials when you&apos;re
-              ready.
+            <p className="mt-3 text-slate-300">
+              Real stories from our learners — what they built, learned, and achieved.
             </p>
           </div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -79,14 +65,15 @@ export function Feedback() {
           >
             <div className="flex items-center gap-2">
               <Stars count={5} />
-              <span className="text-lg font-bold text-white">4.9</span>
+              <span className="text-lg font-bold text-white">5.0</span>
               <span className="text-sm text-slate-400">/ 5</span>
             </div>
-            <p className="text-xs text-slate-400">Aggregated learner satisfaction · last 12 cohorts</p>
+            <p className="text-xs text-slate-400">Learner satisfaction rating</p>
           </motion.div>
         </motion.div>
 
-        <ul className="mt-14 grid gap-6 lg:grid-cols-3">
+        {/* Single testimonial — centred, wider card */}
+        <ul className="mt-12 flex justify-center">
           {testimonials.map((t, i) => (
             <motion.li
               key={t.name}
@@ -94,28 +81,28 @@ export function Feedback() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.07 }}
-              className="flex h-full flex-col rounded-2xl border border-white/[0.1] bg-slate-950/65 p-6 shadow-xl backdrop-blur-md"
+              className="w-full max-w-2xl flex flex-col rounded-2xl border border-white/[0.1] bg-slate-950/65 p-8 shadow-xl backdrop-blur-md"
             >
               <Stars count={t.rating} />
-              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-slate-200">
-                “{t.quote}”
+              <blockquote className="mt-5 flex-1 text-base leading-relaxed text-slate-200">
+                "{t.quote}"
               </blockquote>
-              <div className="mt-6 flex items-center gap-3 border-t border-white/[0.06] pt-5">
+              <div className="mt-7 flex items-center gap-4 border-t border-white/[0.06] pt-6">
                 <img
                   src={t.avatar}
-                  alt=""
-                  className="h-11 w-11 rounded-full object-cover ring-2 ring-violet-500/30"
+                  alt={t.name}
+                  className="h-14 w-14 rounded-full object-cover ring-2 ring-violet-500/40"
                 />
                 <div>
                   <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-slate-400">{t.role}</p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-slate-400">{t.role}</p>
                 </div>
               </div>
             </motion.li>
           ))}
         </ul>
 
-        <p className="mt-16 text-center text-xs text-slate-500">
+        <p className="mt-14 text-center text-xs text-slate-500">
           © {new Date().getFullYear()} {site.name}. {site.tagline}.
         </p>
       </div>
