@@ -6,6 +6,7 @@ import isumi from "../Img/isumi.jpeg";
 import rashmi from "../Img/rashmi.jpeg";
 import thisara from "../Img/thisara.jpeg";
 import vinuk from "../Img/vinuk.jpeg";
+import shenuka from "../Img/Shenuka.jpeg"
 
 type Testimonial = {
   quote: string;
@@ -66,8 +67,8 @@ const testimonials: Testimonial[] = [
     quote:
       "Working under the supervision of Subhath Abeysekara was a highly valuable and supportive experience throughout my project journey. The guidance provided during the development of the Airport Queue Management System helped me successfully complete the project and confidently face the evaluations. Regular meetings, continuous progress tracking, and detailed feedback sessions helped me improve both the technical and research aspects of the system — covering Machine Learning classification, MongoDB, React.js, and web application development. Mistakes and improvements were clearly identified, allowing me to continuously refine the system and achieve better results. Through this mentorship, I gained valuable real-world experience, technical knowledge, and confidence in handling research and software development projects.",
     name: "Shenuka Fernando",
-    role: "Postgraduate Researcher & MSc Candidate in Data Science, UK",
-    avatar: null,
+    role: "Postgraduate Researcher & MSc Candidate in Computer Science, UK",
+    avatar: shenuka,
     initials: "SF",
     rating: 5,
   },
