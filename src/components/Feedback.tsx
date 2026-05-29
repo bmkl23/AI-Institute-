@@ -6,7 +6,8 @@ import isumi from "../Img/isumi.jpeg";
 import rashmi from "../Img/rashmi.jpeg";
 import thisara from "../Img/thisara.jpeg";
 import vinuk from "../Img/vinuk.jpeg";
-import shenuka from "../Img/Shenuka.jpeg"
+import shenuka from "../Img/Shenuka.jpeg";
+import joeson from "../Img/joeson.jpeg";
 
 type Testimonial = {
   quote: string;
@@ -72,6 +73,15 @@ const testimonials: Testimonial[] = [
     initials: "SF",
     rating: 5,
   },
+  {
+    quote:
+      "I'm really happy that I joined Subath ayye's mentorship. He is very friendly, supportive, and easy to talk with. The sessions were comfortable and motivating, and he always explained things clearly without making anyone feel pressured. I learned a lot from the mentorship, and the guidance was genuinely helpful. Highly recommend for anyone looking for a supportive mentor.",
+    name: "Joeson Clerve",
+    role: "ITM Undergraduate, Faculty of Information Technology, University of Moratuwa",
+    avatar: joeson,
+    initials: "JC",
+    rating: 5,
+  },
 ];
 
 function Stars({ count, max = 5 }: { count: number; max?: number }) {
@@ -91,7 +101,15 @@ function Stars({ count, max = 5 }: { count: number; max?: number }) {
   );
 }
 
-function Avatar({ src, initials, name }: { src: string | null; initials: string; name: string }) {
+function Avatar({
+  src,
+  initials,
+  name,
+}: {
+  src: string | null;
+  initials: string;
+  name: string;
+}) {
   if (src !== null) {
     return (
       <img
@@ -120,8 +138,7 @@ export function Feedback() {
         overlayClassName="bg-gradient-to-b from-slate-950/20 via-transparent to-slate-950/40"
       />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-2 md:px-4">
-        <div className="relative z-10 mx-auto max-w-4xl px-6 md:px-10"></div>
+      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -176,7 +193,9 @@ export function Feedback() {
                 <Avatar src={t.avatar} initials={t.initials} name={t.name} />
                 <div>
                   <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-slate-400">{t.role}</p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-slate-400">
+                    {t.role}
+                  </p>
                 </div>
               </div>
             </motion.li>

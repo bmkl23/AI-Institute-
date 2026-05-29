@@ -10,6 +10,10 @@ html {
   scroll-padding-top: 5.5rem;
 }
 
+html {
+  font-size: 20px; /* default browser size is 16px */
+}
+
 body {
   font-family: var(--font-sans);
 }
