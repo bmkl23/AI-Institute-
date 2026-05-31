@@ -8,6 +8,7 @@ import thisara from "../Img/thisara.jpeg";
 import vinuk from "../Img/vinuk.jpeg";
 import shenuka from "../Img/Shenuka.jpeg";
 import joeson from "../Img/joeson.jpeg";
+import ranudi from "../Img/ranudi.jpeg";
 
 type Testimonial = {
   quote: string;
@@ -37,13 +38,14 @@ const testimonials: Testimonial[] = [
     initials: "IA",
     rating: 5,
   },
+  // ↕ Shenuka moved up here (was position 6)
   {
     quote:
-      "I'm happy to provide feedback regarding the mentorship experience under Mr. Rukshan J Senanayake. Throughout my individual project journey, his mentorship has been extremely valuable, supportive, and motivating. The weekly meetings, regular progress tracking, and constructive feedback helped me stay focused and continuously improve my work throughout the project. One thing I truly appreciated was his ability to carefully identify mistakes and clearly explain the correct approaches, best practices, and professional methodologies required for successful project development. His guidance not only helped me solve technical problems, but also introduced me to many new concepts and industry-level ways of thinking. Every meeting became a valuable learning opportunity, and I genuinely feel that I gained significant knowledge, confidence, and professional insight through his mentorship. I am truly grateful for his continuous support, guidance, encouragement, and dedication throughout this journey.",
-    name: "S.M. Rashmi Dananjana Senavirathna",
-    role: "IT Undergraduate, Faculty of Information Technology, University of Moratuwa",
-    avatar: rashmi,
-    initials: "RS",
+      "Working under the supervision of Subhath Abeysekara was a highly valuable and supportive experience throughout my project journey. The guidance provided during the development of the Airport Queue Management System helped me successfully complete the project and confidently face the evaluations. Regular meetings, continuous progress tracking, and detailed feedback sessions helped me improve both the technical and research aspects of the system — covering Machine Learning classification, MongoDB, React.js, and web application development. Mistakes and improvements were clearly identified, allowing me to continuously refine the system and achieve better results. Through this mentorship, I gained valuable real-world experience, technical knowledge, and confidence in handling research and software development projects.",
+    name: "Shenuka Fernando",
+    role: "Postgraduate Researcher & MSc Candidate in Computer Science, UK",
+    avatar: shenuka,
+    initials: "SF",
     rating: 5,
   },
   {
@@ -64,13 +66,14 @@ const testimonials: Testimonial[] = [
     initials: "VS",
     rating: 5,
   },
+  // ↕ Rashmi moved down here (was position 3)
   {
     quote:
-      "Working under the supervision of Subhath Abeysekara was a highly valuable and supportive experience throughout my project journey. The guidance provided during the development of the Airport Queue Management System helped me successfully complete the project and confidently face the evaluations. Regular meetings, continuous progress tracking, and detailed feedback sessions helped me improve both the technical and research aspects of the system — covering Machine Learning classification, MongoDB, React.js, and web application development. Mistakes and improvements were clearly identified, allowing me to continuously refine the system and achieve better results. Through this mentorship, I gained valuable real-world experience, technical knowledge, and confidence in handling research and software development projects.",
-    name: "Shenuka Fernando",
-    role: "Postgraduate Researcher & MSc Candidate in Computer Science, UK",
-    avatar: shenuka,
-    initials: "SF",
+      "I'm happy to provide feedback regarding the mentorship experience under Mr. Rukshan J Senanayake. Throughout my individual project journey, his mentorship has been extremely valuable, supportive, and motivating. The weekly meetings, regular progress tracking, and constructive feedback helped me stay focused and continuously improve my work throughout the project. One thing I truly appreciated was his ability to carefully identify mistakes and clearly explain the correct approaches, best practices, and professional methodologies required for successful project development. His guidance not only helped me solve technical problems, but also introduced me to many new concepts and industry-level ways of thinking. Every meeting became a valuable learning opportunity, and I genuinely feel that I gained significant knowledge, confidence, and professional insight through his mentorship. I am truly grateful for his continuous support, guidance, encouragement, and dedication throughout this journey.",
+    name: "S.M. Rashmi Dananjana Senavirathna",
+    role: "IT Undergraduate, Faculty of Information Technology, University of Moratuwa",
+    avatar: rashmi,
+    initials: "RS",
     rating: 5,
   },
   {
@@ -80,6 +83,15 @@ const testimonials: Testimonial[] = [
     role: "ITM Undergraduate, Faculty of Information Technology, University of Moratuwa",
     avatar: joeson,
     initials: "JC",
+    rating: 5,
+  },
+  {
+    quote:
+      "Working under the supervision of Subhath Abeysekara during my final year project has been a highly valuable experience. Throughout the project, he has been consistently supportive, approachable, and committed to helping me improve my work. His guidance, constructive feedback, and continuous encouragement helped me maintain steady progress and confidently face project evaluations and discussions. One thing I truly appreciate is his willingness to dedicate time for regular meetings and detailed explanations whenever challenges arose. His mentorship not only helped me strengthen the technical aspects of the project, but also improved my problem-solving approach and research understanding. Overall, his supervision has played an important role in my project journey, and I am grateful for the knowledge, support, and guidance provided throughout the process.",
+    name: "Ranudi Jayasundara",
+    role: "Data and AI Intern",
+    avatar: ranudi,
+    initials: "RJ",
     rating: 5,
   },
 ];
