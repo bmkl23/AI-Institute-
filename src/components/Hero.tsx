@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 const highlights = [
-  { icon: "📄", label: "Research Publication Opportunities" },
+  { icon: "📄", label: "Research Publication Opportunities", featured: true, medal: "🥇" },
+  { icon: "💼", label: "Paid Internship (Full-Time or Part-Time)", featured: true, medal: "🥇" },
   { icon: "🧠", label: "Hands-on AI & Machine Learning Projects" },
   { icon: "👤", label: "One-on-One Expert Mentorship" },
   { icon: "🌍", label: "Real-World Problem Solving Experience" },
   { icon: "🎤", label: "Viva-Based Evaluations" },
-  { icon: "💼", label: "Paid Internship (Full-Time or Part-Time)" },
   { icon: "🔬", label: "Industry & Research Focused Learning" },
   { icon: "🎓", label: "Graded Professional Certification" },
 ];
@@ -143,14 +143,27 @@ export function Hero() {
               animate="animate"
               className="space-y-1.5"
             >
-              {highlights.map(({ icon, label }) => (
+              {highlights.map(({ icon, label, featured, medal }) => (
                 <motion.li
                   key={label}
                   variants={stagger.item}
-                  className="flex items-center gap-3 rounded-xl border border-white/[0.05] bg-slate-800/50 px-3 py-2 transition hover:border-blue-500/20 hover:bg-slate-800/80"
+                  className={`flex items-center gap-3 rounded-xl border px-3 py-2 transition ${
+                    featured
+                      ? "border-amber-500/35 bg-amber-500/[0.09] hover:bg-amber-500/[0.14]"
+                      : "border-white/[0.05] bg-slate-800/50 hover:border-blue-500/20 hover:bg-slate-800/80"
+                  }`}
                 >
                   <span className="text-sm leading-none">{icon}</span>
-                  <span className="text-[12.5px] font-medium leading-snug text-slate-200">{label}</span>
+                  <span
+                    className={`text-[12.5px] font-medium leading-snug ${
+                      featured ? "text-amber-100" : "text-slate-200"
+                    }`}
+                  >
+                    {label}
+                  </span>
+                  {medal && (
+                    <span className="ml-auto text-base leading-none">{medal}</span>
+                  )}
                 </motion.li>
               ))}
             </motion.ul>
