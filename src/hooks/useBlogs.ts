@@ -15,7 +15,6 @@ const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPxkrt_RJ1pp3Dq3ir6mz5B5bHvyQGjnECKZWe7uQGNxV6CuoEzLCnFTewJqvZvKFKvm8FYk8bBwgQ/pub?output=csv";
 
 function parseCSV(text: string): Blog[] {
-  // Tokenize the entire CSV respecting quoted fields (which may contain \n)
   const records: string[][] = [];
   let row: string[] = [];
   let cell = "";
@@ -27,7 +26,6 @@ function parseCSV(text: string): Blog[] {
 
     if (ch === '"') {
       if (inQuotes && text[i + 1] === '"') {
-        // Escaped quote ""
         cell += '"';
         i += 2;
       } else {
@@ -39,29 +37,25 @@ function parseCSV(text: string): Blog[] {
       cell = "";
       i++;
     } else if ((ch === '\n' || ch === '\r') && !inQuotes) {
-      // Real row boundary — only outside quotes
-      if (ch === '\r' && text[i + 1] === '\n') i++; // CRLF
+      if (ch === '\r' && text[i + 1] === '\n') i++;
       row.push(cell);
       cell = "";
-      // Skip completely empty rows
       if (row.some(c => c.trim() !== "")) {
         records.push(row);
       }
       row = [];
       i++;
+    } else if ((ch === '\n' || ch === '\r') && inQuotes) {
+      // Newlines INSIDE quotes → keep as real newline for modal display
+      cell += '\n';
+      if (ch === '\r' && text[i + 1] === '\n') i++;
+      i++;
     } else {
-      // Newlines INSIDE quotes become spaces so content stays in one card
-      if ((ch === '\n' || ch === '\r') && inQuotes) {
-        cell += ' ';
-        if (ch === '\r' && text[i + 1] === '\n') i++;
-      } else {
-        cell += ch;
-      }
+      cell += ch;
       i++;
     }
   }
 
-  // Push last row
   row.push(cell);
   if (row.some(c => c.trim() !== "")) records.push(row);
 
