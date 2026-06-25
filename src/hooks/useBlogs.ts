@@ -15,29 +15,64 @@ const SHEET_CSV_URL =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRPxkrt_RJ1pp3Dq3ir6mz5B5bHvyQGjnECKZWe7uQGNxV6CuoEzLCnFTewJqvZvKFKvm8FYk8bBwgQ/pub?output=csv";
 
 function parseCSV(text: string): Blog[] {
-  const lines = text.trim().split("\n");
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(",").map((h) => h.trim().replace(/"/g, ""));
-  return lines.slice(1).map((line) => {
-    // Handle commas inside quoted fields
-    const cols: string[] = [];
-    let current = "";
-    let inQuotes = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') {
-        inQuotes = !inQuotes;
-      } else if (ch === "," && !inQuotes) {
-        cols.push(current.trim());
-        current = "";
+  // Tokenize the entire CSV respecting quoted fields (which may contain \n)
+  const records: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let inQuotes = false;
+  let i = 0;
+
+  while (i < text.length) {
+    const ch = text[i];
+
+    if (ch === '"') {
+      if (inQuotes && text[i + 1] === '"') {
+        // Escaped quote ""
+        cell += '"';
+        i += 2;
       } else {
-        current += ch;
+        inQuotes = !inQuotes;
+        i++;
       }
+    } else if (ch === ',' && !inQuotes) {
+      row.push(cell);
+      cell = "";
+      i++;
+    } else if ((ch === '\n' || ch === '\r') && !inQuotes) {
+      // Real row boundary — only outside quotes
+      if (ch === '\r' && text[i + 1] === '\n') i++; // CRLF
+      row.push(cell);
+      cell = "";
+      // Skip completely empty rows
+      if (row.some(c => c.trim() !== "")) {
+        records.push(row);
+      }
+      row = [];
+      i++;
+    } else {
+      // Newlines INSIDE quotes become spaces so content stays in one card
+      if ((ch === '\n' || ch === '\r') && inQuotes) {
+        cell += ' ';
+        if (ch === '\r' && text[i + 1] === '\n') i++;
+      } else {
+        cell += ch;
+      }
+      i++;
     }
-    cols.push(current.trim());
+  }
+
+  // Push last row
+  row.push(cell);
+  if (row.some(c => c.trim() !== "")) records.push(row);
+
+  if (records.length < 2) return [];
+
+  const headers = records[0].map(h => h.trim().replace(/^"|"$/g, ""));
+
+  return records.slice(1).map((cols) => {
     const obj: Record<string, string> = {};
-    headers.forEach((h, i) => {
-      obj[h] = cols[i] ?? "";
+    headers.forEach((h, idx) => {
+      obj[h] = (cols[idx] ?? "").trim().replace(/^"|"$/g, "");
     });
     return obj as unknown as Blog;
   });
