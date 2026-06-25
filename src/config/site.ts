@@ -5,7 +5,7 @@ export const site = {
   logo: "/peritus-logo.png",
   logoAlt:
     'Peritus Research Bootcamp logo — modern "P" with AI circuitry and analytics growth elements',
-  language: "English only",
+  language: "English",
   whatsapp: {
     display: "072-1452191",
     href: "https://wa.me/94721452191",

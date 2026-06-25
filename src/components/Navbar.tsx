@@ -10,6 +10,7 @@ const links = [
   { id: "syllabus", label: "Syllabus" },
   { id: "contact", label: "Contact" },
   { id: "feedback", label: "Feedback" },
+   { id: "blog", label: "Blog" },
 ];
 
 function scrollNav(id: string, menuWasOpen: boolean) {
