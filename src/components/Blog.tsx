@@ -120,7 +120,7 @@ function BlogCard({
       className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-slate-900/70 shadow-xl shadow-black/30 backdrop-blur-md transition hover:border-blue-500/25 hover:shadow-blue-950/40"
     >
       {/* Cover Image */}
-      <div className="relative h-44 w-full overflow-hidden bg-slate-800">
+      <div className="relative h-56 w-full overflow-hidden bg-slate-800">
         {imageUrl ? (
           <img
             src={imageUrl}
