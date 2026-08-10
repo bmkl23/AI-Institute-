@@ -12,7 +12,7 @@ export function Contact() {
   };
 
   return (
-    <section
+    <section 
       id="contact"
       className="relative overflow-hidden bg-slate-950 py-20 md:py-28"
     >

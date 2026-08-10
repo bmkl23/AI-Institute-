@@ -4,13 +4,14 @@ import { BrandLogo } from "./BrandLogo";
 import { navigateToSectionAfterMenu } from "../utils/scroll";
 
 const links = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "team", label: "Team" },
-  { id: "syllabus", label: "Syllabus" },
-  { id: "contact", label: "Contact" },
-  { id: "feedback", label: "Feedback" },
-   { id: "blog", label: "Blog" },
+  { id: "home",        label: "Home" },
+  { id: "about",       label: "About" },
+  { id: "team",        label: "Team" },
+  { id: "syllabus",    label: "Syllabus" },
+  { id: "counselling", label: "Counselling" },
+  { id: "contact",     label: "Contact" },
+  { id: "feedback",    label: "Feedback" },
+  { id: "blog",        label: "Blog" },
 ];
 
 function scrollNav(id: string, menuWasOpen: boolean) {

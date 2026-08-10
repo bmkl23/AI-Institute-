@@ -6,6 +6,7 @@ import { Syllabus } from "./components/Syllabus";
 import { Feedback } from "./components/Feedback";
 import { Contact } from "./components/Contact";
 import { Blog } from "./components/Blog";
+import { Counselling } from "./components/Counselling";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Syllabus />
         <Contact />
         <Feedback />
+        <Counselling />
         <Blog/>
       </main>
     </div>
