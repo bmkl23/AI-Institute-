@@ -296,7 +296,7 @@ export function Counselling() {
             1-on-1 Counselling
           </span>
           <h2 className="mt-5 text-3xl font-bold text-white md:text-4xl">
-            Book a Session with Our Experts
+            Book a Session with Our Mentors
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-400">
             Personalised guidance from IEEE-published AI researchers. Choose your mentor,
