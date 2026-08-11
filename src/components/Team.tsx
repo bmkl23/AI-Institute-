@@ -34,7 +34,7 @@ const mentors: Member[] = [
   {
     name:  "Subhath Abeysekara",
     badge: "Lead Mentor",
-    role:  "Lead AI Engineer | Tech Lead | AI & Blockchain Researcher | IEEE & Springer Published Author | Research Supervisor – BIT Program, University of Moratuwa | B.Sc. (Hons.) in IT, University of Moratuwa",
+    role:  "Software & AI Solutions Architect | Tech Lead | AI & Blockchain Researcher | IEEE & Springer Published Author | Research Supervisor – BIT Program, University of Moratuwa | B.Sc. (Hons.) in IT, University of Moratuwa",
     image: subath,
     publications: [
       {
