@@ -1,23 +1,23 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import subathImg from "../Img/subath.jpeg";
+import subathImg  from "../Img/subath.jpeg";
 import rukshanImg from "../Img/rukshan.jpeg";
 
 type PersonId = "subhath" | "rukshan";
 type ThemeId  = "research" | "aiml" | "industry";
 
 const RESOURCE_PERSONS: {
-  id: PersonId; name: string; role: string; rate: number; image: string; color: string;
+  id: PersonId; name: string; role: string; rate: number; image: string;
 }[] = [
-  { id: "subhath", name: "Subhath Abeysekara",   role: "Software & AI Solutions Architect | Tech Lead", rate: 2000, image: subathImg, color: "from-blue-500 to-indigo-600"   },
-  { id: "rukshan", name: "Rukshan J Senanayake", role: "AI Researcher & IEEE Author",                   rate: 2000, image: rukshanImg, color: "from-violet-500 to-purple-600" },
+  { id: "subhath", name: "Subhath Abeysekara",   role: "Software & AI Solutions Architect | Tech Lead", rate: 2000, image: subathImg  },
+  { id: "rukshan", name: "Rukshan J Senanayake", role: "AI Researcher & IEEE Author",                   rate: 2000, image: rukshanImg },
 ];
 
 const THEMES: { id: ThemeId; label: string; icon: string; desc: string }[] = [
-  { id: "research", label: "Research",              icon: "", desc: "Academic & scientific research guidance" },
-  { id: "aiml",     label: "AI/ML & IT",            icon: "", desc: "Artificial intelligence & tech topics"  },
-  { id: "industry", label: "Industrial Experience", icon: "", desc: "Career, industry & professional growth"  },
+  { id: "research", label: "Research",              icon: "🔬", desc: "Academic & scientific research guidance" },
+  { id: "aiml",     label: "AI/ML & IT",            icon: "🤖", desc: "Artificial intelligence & tech topics"  },
+  { id: "industry", label: "Industrial Experience", icon: "🏢", desc: "Career, industry & professional growth"  },
 ];
 
 const TOPICS: Record<ThemeId, string[]> = {
@@ -103,7 +103,7 @@ const TOPICS: Record<ThemeId, string[]> = {
   ],
 };
 
-const PERITUS_EMAIL = "peritus@gmail.com";
+const FORMSPREE_URL = "https://formspree.io/f/xqpzbgrd";
 const STEPS = ["Mentor", "Duration", "Theme", "Topic", "Details"];
 
 export function Counselling() {
@@ -116,6 +116,8 @@ export function Counselling() {
   const [email, setEmail]                     = useState<string>("");
   const [note, setNote]                       = useState<string>("");
   const [sent, setSent]                       = useState<boolean>(false);
+  const [submitting, setSubmitting]           = useState<boolean>(false);
+  const [error, setError]                     = useState<string>("");
 
   const price = useMemo(() => {
     if (!duration || selectedPersons.length === 0) return null;
@@ -142,44 +144,65 @@ export function Counselling() {
     name.trim() !== "" &&
     email.trim() !== "";
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!allValid || !theme || !duration || price === null) return;
+
+    setSubmitting(true);
+    setError("");
+
     const personNames = selectedPersons
       .map((id) => RESOURCE_PERSONS.find((p) => p.id === id)?.name)
       .join(" & ");
     const themeLabel  = THEMES.find((t) => t.id === theme)?.label ?? theme;
     const ratePerHour = selectedPersons.length === 2 ? 3000 : 2000;
-    const bodyLines   = [
-      `New Counselling Session Request — Peritus`,
-      ``,
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      `CLIENT DETAILS`,
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      `Name        : ${name}`,
-      `Email       : ${email}`,
-      ``,
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      `SESSION DETAILS`,
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      `Resource Person(s) : ${personNames}`,
-      `Duration           : ${duration} hour${duration > 1 ? "s" : ""}`,
-      `Rate               : LKR ${ratePerHour.toLocaleString()}/hour`,
-      `Total Price        : LKR ${price.toLocaleString()}`,
-      ``,
-      `Theme : ${themeLabel}`,
-      `Topic : ${topic}`,
-      ``,
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      `ADDITIONAL NOTES`,
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-      note.trim() || "(none)",
-    ];
-    const subject = encodeURIComponent(`Counselling Request – ${themeLabel} | ${name}`);
-    const body    = encodeURIComponent(bodyLines.join("\n"));
-    window.location.href = `mailto:${PERITUS_EMAIL}?subject=${subject}&body=${body}`;
-    setSent(true);
+
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          // Formspree uses "_subject" and "email" as special fields
+          _subject:         `Counselling Request – ${themeLabel} | ${name}`,
+          email,
+          name,
+          // Session details
+          mentor:           personNames,
+          duration:         `${duration} hour${duration > 1 ? "s" : ""}`,
+          rate_per_hour:    `LKR ${ratePerHour.toLocaleString()}/hour`,
+          total_price:      `LKR ${price.toLocaleString()}`,
+          theme:            themeLabel,
+          topic,
+          additional_notes: note.trim() || "(none)",
+        }),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        const data = await res.json();
+        setError(data?.error ?? "Something went wrong. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
+  const resetForm = () => {
+    setSent(false);
+    setStep(0);
+    setSelectedPersons([]);
+    setDuration(null);
+    setTheme(null);
+    setTopic("");
+    setName("");
+    setEmail("");
+    setNote("");
+    setError("");
+  };
+
+  // ── Reusable nav buttons ──────────────────────────────────────────────────
   const NavButtons = ({
     prevStep,
     nextStep,
@@ -209,18 +232,30 @@ export function Counselling() {
 
       <button
         type="button"
-        disabled={nextDisabled}
+        disabled={nextDisabled || submitting}
         onClick={isSubmit ? handleSubmit : () => nextStep !== undefined && setStep(nextStep)}
         className={`flex items-center gap-2 rounded-xl px-7 py-3 text-sm font-semibold transition ${
-          !nextDisabled
+          !nextDisabled && !submitting
             ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:brightness-110"
             : "cursor-not-allowed bg-slate-800 text-slate-500"
         }`}
       >
-        {nextLabel}
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-        </svg>
+        {submitting ? (
+          <>
+            <svg className="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+            </svg>
+            Sending…
+          </>
+        ) : (
+          <>
+            {nextLabel}
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </>
+        )}
       </button>
     </div>
   );
@@ -240,7 +275,7 @@ export function Counselling() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 backdrop-blur-sm"
           >
             <div className="w-full max-w-md rounded-2xl border border-emerald-500/30 bg-slate-900 p-8 text-center shadow-[0_0_60px_rgba(16,185,129,0.15)]">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/15 ring-1 ring-emerald-500/30">
@@ -251,27 +286,18 @@ export function Counselling() {
               <h3 className="mt-5 text-xl font-bold text-white">Booking Request Sent!</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-400">
                 Your counselling session request has been submitted successfully. Our team will
-                review your details and confirm your session within <span className="font-semibold text-white">24 hours</span>.
+                review your details and confirm your session within{" "}
+                <span className="font-semibold text-white">24 hours</span>.
               </p>
-              <div className="mt-5 rounded-xl border border-white/[0.07] bg-slate-800/60 px-4 py-3 text-left text-xs text-slate-400 space-y-1">
+              <div className="mt-5 space-y-1.5 rounded-xl border border-white/[0.07] bg-slate-800/60 px-4 py-3 text-left text-xs text-slate-400">
                 <p>👤 <span className="text-white">{selectedPersons.map((id) => RESOURCE_PERSONS.find((p) => p.id === id)?.name).join(" & ")}</span></p>
                 <p>🎯 <span className="text-white">{topic}</span></p>
                 <p>⏱ <span className="text-white">{duration}h · LKR {price?.toLocaleString()}</span></p>
-                <p>📧 Confirmation will be sent to <span className="text-blue-300">{email}</span></p>
+                <p>📧 Confirmation to <span className="text-blue-300">{email}</span></p>
               </div>
               <button
                 type="button"
-                onClick={() => {
-                  setSent(false);
-                  setStep(0);
-                  setSelectedPersons([]);
-                  setDuration(null);
-                  setTheme(null);
-                  setTopic("");
-                  setName("");
-                  setEmail("");
-                  setNote("");
-                }}
+                onClick={resetForm}
                 className="mt-6 w-full rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3 text-sm font-semibold text-white transition hover:brightness-110"
               >
                 Done
@@ -341,7 +367,7 @@ export function Counselling() {
           ))}
         </motion.div>
 
-        {/* ── Step Panel ── */}
+        {/* ── Step Panels ── */}
         <div className="mt-8">
           <AnimatePresence mode="wait">
 
@@ -360,39 +386,38 @@ export function Counselling() {
                         key={p.id}
                         type="button"
                         onClick={() => togglePerson(p.id)}
-                        className={`group relative overflow-hidden rounded-2xl border text-left transition-all duration-300 ${
+                        className={`group relative overflow-hidden rounded-2xl border p-5 text-left transition-all duration-300 ${
                           active
                             ? "border-blue-500/50 bg-gradient-to-br from-blue-950/60 to-indigo-950/40 shadow-[0_0_30px_rgba(99,102,241,0.15)]"
                             : "border-white/[0.08] bg-slate-900/60 hover:border-white/20"
                         }`}
                       >
-                        {/* Photo */}
-                        <div className="relative h-48 overflow-hidden">
-                          <img src={p.image} alt={p.name} className="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105" />
-                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-                          {active && (
-                            <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-blue-500 shadow-lg">
-                              <svg className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                              </svg>
-                            </span>
-                          )}
-                        </div>
-                        {/* Info */}
-                        <div className="p-5">
-                          <p className="text-base font-semibold text-white">{p.name}</p>
-                          <p className="mt-0.5 text-xs leading-relaxed text-slate-400">{p.role}</p>
-                          <p className="mt-4 inline-flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">
-                            LKR {p.rate.toLocaleString()} / hour
-                          </p>
+                        {active && (
+                          <span className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-blue-500 shadow-lg">
+                            <svg className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                            </svg>
+                          </span>
+                        )}
+                        <div className="flex items-center gap-4">
+                          <div className={`h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ${active ? "ring-blue-500/60" : "ring-white/10"}`}>
+                            <img src={p.image} alt={p.name} className="h-full w-full object-cover object-top" />
+                          </div>
+                          <div>
+                            <p className="text-base font-semibold text-white">{p.name}</p>
+                            <p className="mt-0.5 text-xs leading-relaxed text-slate-400">{p.role}</p>
+                            <p className="mt-3 inline-flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">
+                              LKR {p.rate.toLocaleString()} / hour
+                            </p>
+                          </div>
                         </div>
                       </button>
                     );
                   })}
                 </div>
                 {selectedPersons.length === 2 && (
-                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-4 flex items-center gap-3 rounded-xl border border-indigo-500/25 bg-indigo-500/8 px-4 py-3">
-                    <span className="text-lg"></span>
+                  <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-4 flex items-center gap-3 rounded-xl border border-indigo-500/25 bg-indigo-500/10 px-4 py-3">
+                    <span className="text-lg">✨</span>
                     <p className="text-xs text-indigo-300">Both mentors selected — combined rate is <span className="font-bold text-white">LKR 3,000/hour</span></p>
                   </motion.div>
                 )}
@@ -489,7 +514,8 @@ export function Counselling() {
                 <div className="mb-6 text-center">
                   <p className="text-lg font-semibold text-white">Select your topic</p>
                   <p className="mt-1 text-sm text-slate-400">
-                    {TOPICS[theme].length} topics under <span className="text-violet-300">{THEMES.find((t) => t.id === theme)?.label}</span>
+                    {TOPICS[theme].length} topics under{" "}
+                    <span className="text-violet-300">{THEMES.find((t) => t.id === theme)?.label}</span>
                   </p>
                 </div>
                 <div className="grid max-h-72 gap-2 overflow-y-auto pr-1 sm:grid-cols-2">
@@ -515,9 +541,11 @@ export function Counselling() {
                   ))}
                 </div>
                 {topic && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 flex items-center gap-2 rounded-xl border border-violet-500/20 bg-violet-500/8 px-4 py-2.5">
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 flex items-center gap-2 rounded-xl border border-violet-500/20 bg-violet-500/10 px-4 py-2.5">
                     <span className="text-sm">✅</span>
-                    <p className="text-xs text-violet-300">Selected: <span className="font-semibold text-white">{topic}</span></p>
+                    <p className="text-xs text-violet-300">
+                      Selected: <span className="font-semibold text-white">{topic}</span>
+                    </p>
                   </motion.div>
                 )}
                 <NavButtons prevStep={2} nextStep={4} nextDisabled={topic === ""} />
@@ -540,40 +568,81 @@ export function Counselling() {
                       <span className="text-base">👤</span>
                       <div>
                         <p className="text-[10px] text-slate-500">Mentor(s)</p>
-                        <p className="text-xs font-medium text-white">{selectedPersons.map((id) => RESOURCE_PERSONS.find((p) => p.id === id)?.name).join(" & ")}</p>
+                        <p className="text-xs font-medium text-white">
+                          {selectedPersons.map((id) => RESOURCE_PERSONS.find((p) => p.id === id)?.name).join(" & ")}
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-4 py-2.5">
                       <span className="text-base">⏱</span>
                       <div>
                         <p className="text-[10px] text-slate-500">Duration & Price</p>
-                        <p className="text-xs font-medium text-white">{duration}h · <span className="text-emerald-400">LKR {price?.toLocaleString()}</span></p>
+                        <p className="text-xs font-medium text-white">
+                          {duration}h · <span className="text-emerald-400">LKR {price?.toLocaleString()}</span>
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 rounded-xl bg-white/[0.03] px-4 py-2.5 sm:col-span-2">
                       <span className="text-base">🎯</span>
                       <div>
                         <p className="text-[10px] text-slate-500">Theme & Topic</p>
-                        <p className="text-xs font-medium text-white">{THEMES.find((t) => t.id === theme)?.label} → {topic}</p>
+                        <p className="text-xs font-medium text-white">
+                          {THEMES.find((t) => t.id === theme)?.label} → {topic}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
+                {/* Form inputs */}
                 <div className="space-y-3">
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <input type="text" placeholder="Your full name" value={name} onChange={(e) => setName(e.target.value)}
-                      className="rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30" />
-                    <input type="email" placeholder="Your email address" value={email} onChange={(e) => setEmail(e.target.value)}
-                      className="rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30" />
+                    <input
+                      type="text"
+                      placeholder="Your full name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30"
+                    />
                   </div>
-                  <textarea rows={3} placeholder="Any additional notes? (optional)" value={note} onChange={(e) => setNote(e.target.value)}
-                    className="w-full resize-none rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30" />
+                  <textarea
+                    rows={3}
+                    placeholder="Any additional notes? (optional)"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    className="w-full resize-none rounded-xl border border-white/[0.08] bg-slate-800/60 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/30"
+                  />
                 </div>
 
-                <NavButtons prevStep={3} nextDisabled={!allValid} nextLabel="Send Booking Request" isSubmit />
+                {/* Error message */}
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-4 flex items-center gap-2 rounded-xl border border-red-500/25 bg-red-500/10 px-4 py-3 text-sm text-red-300"
+                  >
+                    <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                    </svg>
+                    {error}
+                  </motion.div>
+                )}
+
+                <NavButtons
+                  prevStep={3}
+                  nextDisabled={!allValid}
+                  nextLabel="Send Booking Request"
+                  isSubmit
+                />
                 <p className="mt-4 text-center text-xs text-slate-500">
-                  Opens your email client · We confirm within 24 hours
+                  Your request is sent directly to our team · We confirm within 24 hours
                 </p>
               </motion.div>
             )}
