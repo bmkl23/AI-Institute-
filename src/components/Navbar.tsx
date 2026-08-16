@@ -12,6 +12,7 @@ const links = [
   { id: "contact",     label: "Contact" },
   { id: "feedback",    label: "Feedback" },
   { id: "blog",        label: "Blog" },
+  { id: "challenge", label: "Challenge" },
 ];
 
 function scrollNav(id: string, menuWasOpen: boolean) {

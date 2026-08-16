@@ -7,6 +7,7 @@ import { Feedback } from "./components/Feedback";
 import { Contact } from "./components/Contact";
 import { Blog } from "./components/Blog";
 import { Counselling } from "./components/Counselling";
+import { MLChallenge } from "./components/MLChallenge";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Contact />
         <Feedback />
         <Counselling />
+         <MLChallenge />
         <Blog/>
       </main>
     </div>
