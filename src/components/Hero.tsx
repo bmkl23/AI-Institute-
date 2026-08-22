@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { SectionPhotoBg, sectionBg } from "./SectionPhotoBg";
 
 const highlights = [
@@ -54,6 +55,8 @@ const stagger = {
 };
 
 export function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section
       id="home"
@@ -113,6 +116,29 @@ export function Hero() {
           <p className="mt-5 text-xs text-slate-500">
             Open to After A/L students, undergraduates &amp; fresh graduates across Sri Lanka.
           </p>
+
+          {/* A/L Bootcamp Banner */}
+          <motion.button
+            onClick={() => navigate("/al-bootcamp")}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-6 flex w-full items-center justify-between rounded-2xl border border-blue-500/50 bg-gradient-to-r from-blue-900/60 to-indigo-900/50 px-4 py-3.5 text-left shadow-[0_0_20px_rgba(59,130,246,0.25)] transition hover:border-blue-400/70 hover:from-blue-900/70 hover:to-indigo-900/60 hover:shadow-[0_0_28px_rgba(59,130,246,0.4)] group"
+          >
+            <div className="flex items-center gap-3">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-wider text-blue-400">Also from Peritus</p>
+                <p className="text-[15px] font-bold text-white">A/L Conceptual Thinking Bootcamp</p>
+                <p className="text-[12px] text-slate-300">For GCE A/L Students · Physics, Chemistry, Maths & more</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 rounded-lg border border-blue-400/70 bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-white shadow-[0_0_14px_rgba(59,130,246,0.45)] transition group-hover:translate-x-1 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.65)]">
+              <span className="text-[12px] font-bold">Explore</span>
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </div>
+          </motion.button>
         </motion.div>
 
         {/* RIGHT */}

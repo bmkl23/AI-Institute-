@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -8,8 +9,9 @@ import { Contact } from "./components/Contact";
 import { Blog } from "./components/Blog";
 import { Counselling } from "./components/Counselling";
 import { MLChallenge } from "./components/MLChallenge";
+import { ALBootcamp } from "./components/ALBootcamp";
 
-export default function App() {
+function MainSite() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 antialiased">
       <Navbar />
@@ -21,9 +23,20 @@ export default function App() {
         <Contact />
         <Feedback />
         <Counselling />
-         <MLChallenge />
-        <Blog/>
+        <MLChallenge />
+        <Blog />
       </main>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainSite />} />
+        <Route path="/al-bootcamp" element={<ALBootcamp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

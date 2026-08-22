@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BrandLogo } from "./BrandLogo";
 import { navigateToSectionAfterMenu } from "../utils/scroll";
 
@@ -12,7 +13,7 @@ const links = [
   { id: "contact",     label: "Contact" },
   { id: "feedback",    label: "Feedback" },
   { id: "blog",        label: "Blog" },
-  { id: "challenge", label: "Challenge" },
+  { id: "challenge",   label: "Challenge" },
 ];
 
 function scrollNav(id: string, menuWasOpen: boolean) {
@@ -21,6 +22,7 @@ function scrollNav(id: string, menuWasOpen: boolean) {
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleNavigate = (id: string) => {
     const wasOpen = open;
@@ -53,6 +55,19 @@ export function Navbar() {
           ))}
         </ul>
 
+        {/* A/L Bootcamp CTA Button */}
+        <button
+          type="button"
+          onClick={() => navigate("/al-bootcamp")}
+          className="hidden lg:inline-flex items-center gap-2 rounded-xl border border-blue-400/70 bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-2.5 text-[13px] font-bold text-white shadow-[0_0_22px_rgba(59,130,246,0.55),inset_0_1px_0_rgba(255,255,255,0.2)] transition hover:from-blue-500 hover:to-indigo-500 hover:shadow-[0_0_32px_rgba(59,130,246,0.75)]"
+        >
+          A/L Bootcamp
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </button>
+
+        {/* Mobile hamburger */}
         <button
           type="button"
           className="inline-flex h-11 min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-xl border border-white/25 bg-white/12 text-zinc-50 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-sm outline-none ring-offset-2 ring-offset-slate-950 focus-visible:ring-2 focus-visible:ring-blue-400 lg:hidden active:bg-white/20"
@@ -93,6 +108,16 @@ export function Navbar() {
                   </button>
                 </li>
               ))}
+              {/* Mobile A/L Bootcamp button */}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => { setOpen(false); navigate("/al-bootcamp"); }}
+                  className="w-full rounded-xl border border-violet-500/30 bg-violet-500/10 px-4 py-3.5 text-left text-base font-bold text-violet-300 transition hover:bg-violet-500/20"
+                >
+                  A/L Bootcamp →
+                </button>
+              </li>
             </ul>
           </motion.div>
         )}
